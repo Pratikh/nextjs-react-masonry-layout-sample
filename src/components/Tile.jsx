@@ -9,8 +9,13 @@ var options = {
   threshold: 0.5,
 };
 
+const defaultVariant = {
+  visible: { opacity: 1, y: "0" },
+  hidden: { opacity: 0, y: "100vh" },
+};
+
 export default function Tile(props) {
-  const [state, setState] = React.useState(false);
+  const [state, setState] = React.useState(props.showOnLoad);
   const ref = React.useRef(null);
   const refAgain = React.useRef(0);
   React.useEffect(() => {
@@ -32,10 +37,7 @@ export default function Tile(props) {
   return (
     <figure className={style.figure} ref={ref}>
       <motion.div
-        variants={{
-          visible: { opacity: 1, y: "0" },
-          hidden: { opacity: 0, y: "100vh" },
-        }}
+        variants={props.variants || defaultVariant}
         whileHover={{
           y: -15,
           transition: { duration: 0.2 },
@@ -44,14 +46,19 @@ export default function Tile(props) {
         animate={state ? "visible" : "hidden"}
         transition={{ ease: "linear", duration: 0.5 }}
       >
-        <Image
-          className={style.img}
-          src={props.urls.regular}
-          alt={props.alt}
-          width={props.imageProps.width}
-          height={props.imageProps.height}
-        />
-        <p>{props.alt}</p>
+        <div>
+          <Image
+            className={style.img}
+            src={props.urls.regular}
+            alt={props.alt}
+            width={props.imageProps.width}
+            height={props.imageProps.height}
+            placeholder="blur"
+            blurDataURL={`${props.urls.regular}?width=${parseInt(
+              (props.imageProps.width * 1) / 100
+            )}&height=${parseInt((props.imageProps.height * 1) / 100)}`}
+          />
+        </div>
       </motion.div>
     </figure>
   );
