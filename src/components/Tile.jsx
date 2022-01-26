@@ -36,7 +36,7 @@ export default function Tile(props) {
   }, [state]);
   return (
     <figure className={style.figure} ref={ref}>
-      <motion.div
+      {/* <motion.div
         variants={props.variants || defaultVariant}
         whileHover={{
           y: -15,
@@ -59,7 +59,7 @@ export default function Tile(props) {
             )}&height=${parseInt((props.imageProps.height * 1) / 100)}`}
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </figure>
   );
 }
