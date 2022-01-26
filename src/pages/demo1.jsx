@@ -17,9 +17,10 @@ export const getStaticProps = async (context) => {
   // const result = await axios.get(
   //   "http://localhost:3000/api/searchPhoto?query=cat"
   // );
-  const result ={
-    data:[]
-  }
+  const result = {
+    data: [],
+    mappedResponse: [],
+  };
   return { props: { result: result.data }, revalidate: 60 * 60 * 24 };
 };
 
