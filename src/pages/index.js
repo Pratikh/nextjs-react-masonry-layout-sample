@@ -1,9 +1,9 @@
 import Head from "next/head";
 import axios from "axios";
 import React from "react";
-import Jimp from "jimp";
 import MasanryList from "src/components/MasanryList";
 const Index = (props) => {
+  console.log(props);
   return (
     <>
       <Head>
