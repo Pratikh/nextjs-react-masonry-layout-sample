@@ -44,7 +44,7 @@ export default function Header() {
       <div>
         {nav.map((data) => (
           <Link href={data.link} key={data.name}>
-            {data.name}
+            <a>{data.name}</a>
           </Link>
         ))}
       </div>

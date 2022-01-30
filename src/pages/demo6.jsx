@@ -1,9 +1,9 @@
 import Head from "next/head";
-import axios from "axios";
 import React from "react";
-import apiCall from "../utils/getAnimalsData";
 import MasanryList from "src/components/MasanryList";
-const Index = (props) => {
+import apiCall from "../utils/getAnimalsData";
+
+const Demo1 = (props) => {
   return (
     <>
       <Head>
@@ -15,8 +15,8 @@ const Index = (props) => {
 };
 
 export const getStaticProps = async () => {
-  const result = await apiCall("dog");
+  const result = await apiCall("bengal-tiger");
   return { props: { result }, revalidate: 60 * 60 * 24 };
 };
 
-export default Index;
+export default Demo1;

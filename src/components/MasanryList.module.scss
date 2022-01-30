@@ -14,6 +14,10 @@
 .container {
   column-count: 4;
   column-gap: 10px;
+  @media only screen and (max-width: 600px) {
+    column-count: 3;
+    column-gap: 5px;
+  }
 }
 
 .innerDiv {
@@ -26,6 +30,7 @@
   grid-template-rows: 1fr auto;
   margin-bottom: 10px;
   break-inside: avoid;
+  overflow: hidden;
 }
 
 .img {

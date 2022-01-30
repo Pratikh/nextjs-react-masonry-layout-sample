@@ -36,17 +36,22 @@ export default function Tile(props) {
   }, [state]);
   return (
     <figure className={style.figure} ref={ref}>
-      {/* <motion.div
+      <motion.div
         variants={props.variants || defaultVariant}
-        whileHover={{
-          y: -15,
-          transition: { duration: 0.2 },
-        }}
+        // whileHover={{
+        //   y: -15,
+        //   transition: { duration: 0.2 },
+        // }}
         initial="hidden"
         animate={state ? "visible" : "hidden"}
         transition={{ ease: "linear", duration: 0.5 }}
       >
-        <div>
+        <motion.div
+          whileHover={{
+            scale: 1.2,
+            transition: { duration: 0.2 },
+          }}
+        >
           <Image
             className={style.img}
             src={props.urls.regular}
@@ -58,8 +63,8 @@ export default function Tile(props) {
               (props.imageProps.width * 1) / 100
             )}&height=${parseInt((props.imageProps.height * 1) / 100)}`}
           />
-        </div>
-      </motion.div> */}
+        </motion.div>
+      </motion.div>
     </figure>
   );
 }

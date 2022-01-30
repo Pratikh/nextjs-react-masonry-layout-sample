@@ -1,13 +1,27 @@
-import axios from "axios";
+import { createApi } from "unsplash-js";
 import Jimp from "jimp";
 
-export async function getAnimalsData(query) {
-  const result = await axios.get(
-    "http://localhost:3000/api/searchPhoto?query=" + (query || "dogs")
-  );
+const api = createApi({
+  accessKey: process.env.UNSPLASH_TOKEN,
+});
+
+const dataGetter = async (query) => {
+  const result = await api.search.getPhotos({
+    query,
+    page: 1,
+    perPage: 30,
+  });
+  const mappedResponse = result.response.results.map((a) => {
+    return {
+      id: a.id,
+      alt: a.alt_description,
+      link: a.links,
+      urls: a.urls,
+    };
+  });
 
   const arrayOfPromise = [];
-  result.data.mappedResponse.forEach((a) => {
+  mappedResponse.forEach((a) => {
     const promise = new Promise((resolve) => {
       Jimp.read(a.urls.regular).then((data) => {
         a.imageProps = {
@@ -20,6 +34,7 @@ export async function getAnimalsData(query) {
     arrayOfPromise.push(promise);
   });
   await Promise.all(arrayOfPromise);
+  return mappedResponse;
+};
 
-  return arrayOfPromise;
-}
+export default dataGetter;
